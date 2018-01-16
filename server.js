@@ -11,8 +11,8 @@ const BlogPosts = require('./models');
 
 //get the blog posts that are on the server
 app.get('/blog-posts', (req, res) => {
-
-})
+  res.json(BlogPosts.get());
+});
 
 //post to the blog posts on the server
 
