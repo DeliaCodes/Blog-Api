@@ -5,6 +5,7 @@ const router = express.Router();
 const app = express();
 
 //modularize routes
+const BlogPosts = require('./models');
 
 //blog posts for the server
 
