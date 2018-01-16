@@ -1,12 +1,13 @@
 {
-  "name": "Delia Codes",
-  "version": "0.1",
+  "name": "blog-api",
+  "version": "0.0.1",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.16.2",
+    "nodemon": "^1.14.11",
     "uuid": "^3.1.0"
   }
 }
