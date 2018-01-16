@@ -1,11 +1,11 @@
 "use strict";
 const express = require('express');
 const router = express.Router();
-//const bodyParser = ('body-parser');
+const bodyParser = require('body-parser');
 
 const app = express();
 
-//const jsonParser = bodyParser.json();
+const jsonParser = bodyParser.json();
 
 //modularize routes?
 const {
@@ -23,11 +23,11 @@ app.get('/blog-posts', (req, res) => {
 });
 
 //post to the blog posts on the server
-app.post('/blog-posts', (req, res) => {
+app.post('/blog-posts', jsonParser, (req, res) => {
   const requiredFields = ['title', 'content', 'author'];
-  const req.body.map(
-    //if requiredFields are in req.then perform the action?
-  );
+  // const req.body.map(
+  //if requiredFields are in req.then perform the action?
+  //);
 })
 
 //delete a blog post
@@ -37,7 +37,7 @@ app.delete('/blog-posts/:id', (req, res) => {
 })
 
 //update a blog post using put
-app.put('/blog-posts/:id', (req, res) => {
+app.put('/blog-posts/:id', jsonParser, (req, res) => {
   const requiredFields = ['title', 'content', 'author'];
   //sort through the body and do an update
 
