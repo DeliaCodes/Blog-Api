@@ -42,7 +42,7 @@ app.put('/blog-posts/:id', (req, res) => {
   //sort through the body and do an update
 
 
-})
+});
 
 //starts the server
 app.listen(process.env.PORT || 8060, () => {
