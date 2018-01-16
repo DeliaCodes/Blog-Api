@@ -18,3 +18,7 @@ app.get('/blog-posts', (req, res) => {
 
 //delete a blog post
 //update a blog post using put
+
+app.listen(process.env.PORT || 8060, () => {
+  console.log(`Your app is listening on port ${process.env.PORT || 8060}`);
+})
