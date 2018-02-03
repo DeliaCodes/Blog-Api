@@ -59,11 +59,11 @@ describe('Blog post', function () {
       });
   });
 
-  it('delete a Blog post on DELETE', function () {
+  /* it('delete a Blog post on DELETE', function () {
 
   });
 
   it('should update a Blog post on PUT', function () {
 
-  });
+  }); */
 });

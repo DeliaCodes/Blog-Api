@@ -1,3 +1,7 @@
+import {
+  resolve
+} from 'dns';
+
 "use strict";
 const express = require('express');
 const router = express.Router();
@@ -44,7 +48,44 @@ app.put('/blog-posts/:id', jsonParser, (req, res) => {
 
 });
 
+let server;
+
+const runServer = () => {
+  const port = process.env.PORT || 8080;
+  return new Promise((resolve, reject) => {
+    server = app.listen(port, () => {
+      console.log(`Your app is listening on port ${port}`);
+      resolve(server);
+    }).on('error', err => {
+      reject(err)
+    });
+  });
+};
+
+const closeServer = () => {
+  return new Promise((resolve, reject) => {
+    console.log('Closing server');
+    server.close(err => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve();
+    });
+  });
+};
+
+if (require.main === module) {
+  runServer().catch(err => console.error(err));
+};
+
+module.exports = {
+  app,
+  runServer,
+  closeServer
+};
+
 //starts the server
-app.listen(process.env.PORT || 8060, () => {
+/* app.listen(process.env.PORT || 8060, () => {
   console.log(`Your app is listening on port ${process.env.PORT || 8060}`);
-})
+}) */
