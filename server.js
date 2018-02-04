@@ -1,6 +1,6 @@
-import {
+/* import {
   resolve
-} from 'dns';
+} from 'dns'; */
 
 "use strict";
 const express = require('express');
@@ -32,13 +32,13 @@ app.post('/blog-posts', jsonParser, (req, res) => {
   // const req.body.map(
   //if requiredFields are in req.then perform the action?
   //);
-})
+});
 
 //delete a blog post
 app.delete('/blog-posts/:id', (req, res) => {
   BlogPosts.delete(req.params.id);
   res.send(204).end();
-})
+});
 
 //update a blog post using put
 app.put('/blog-posts/:id', jsonParser, (req, res) => {
@@ -57,7 +57,7 @@ const runServer = () => {
       console.log(`Your app is listening on port ${port}`);
       resolve(server);
     }).on('error', err => {
-      reject(err)
+      reject(err);
     });
   });
 };
@@ -77,10 +77,9 @@ const closeServer = () => {
 
 if (require.main === module) {
   runServer().catch(err => console.error(err));
-};
+}
 
 module.exports = {
-  app,
   runServer,
   closeServer
 };
