@@ -1,3 +1,10 @@
 {
-  "esversion": 6
+  "esversion": 6,
+  "node": true,
+  "require": true,
+  "module": true,
+  "describe": true,
+  "before": true,
+  "after": true,
+  "it": true
 }
