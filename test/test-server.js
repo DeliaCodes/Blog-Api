@@ -25,7 +25,7 @@ describe('Blog post', function () {
 
   it('list posts on GET', function () {
 
-    return chaiHttp.request(app)
+    return chai.request(app)
       .get('/blog-posts')
       .then(function (res) {
         expect(res).to.have.status(200);
@@ -47,7 +47,7 @@ describe('Blog post', function () {
       author: 'Miss Piggy'
     };
 
-    return chaiHttp.request(app)
+    return chai.request(app)
       .post('/blog-posts')
       .send(newPost)
       .then(function (res) {
@@ -62,11 +62,37 @@ describe('Blog post', function () {
       });
   });
 
-  /* it('delete a Blog post on DELETE', function () {
-
+  it('delete a Blog post on DELETE', function () {
+    return chai.request(app)
+      .get('/blot-posts')
+      .then(function (res) {
+        return chai.request(app)
+          .delete(`/blog-posts/${res.body[0].id}`);
+      })
+      .then(function (res) {
+        expect(res).to.have.status(204);
+      });
   });
 
   it('should update a Blog post on PUT', function () {
+    const updateBlogPost = {
+      'title': 'How Is This Possible???',
+      'content': 'Lorem Ipsum',
+    };
+    return chai.request(app)
+      .get('/blog-posts')
+      .then(function (res) {
+        updateBlogPost.id = res.body[0].id;
+        return chai.request(app)
+          .put(`/blog-posts/${updateBlogPost.id}`)
+          .send(updateBlogPost);
+      })
+      .then(function (res) {
+        expect(res).to.have.status(200);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+        expect(res.body).to.deep.equal(updateBlogPost);
+      });
+  });
 
-  }); */
 });

@@ -78,6 +78,7 @@
  }
 
  module.exports = {
+   app,
    runServer,
    closeServer
  };
