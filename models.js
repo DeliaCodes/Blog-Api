@@ -12,12 +12,17 @@ const blogPostSchema = mongoose.Schema({
     required: true
   },
   author: {
-    type: String,
-    required: true
+    first: String,
+    last: String
+  },
+  created: {
+    type: String
   }
 });
 
-
+blogPostSchema.virtual('authorString').get(() => {
+  return `${this.author.first} ${this.author.last}`.trim();
+});
 
 
 
