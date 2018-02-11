@@ -9,10 +9,12 @@ const mongoose = require('mongoose');
 const jsonParser = bodyParser.json();
 
 mongoose.Promise = global.Promise;
+mongoose.connect(DATABASE_URL);
+S
 
 //modularize routes?
 const {
-  BlogPosts
+  BlogPostsData
 } = require('./models');
 
 const {
@@ -29,7 +31,21 @@ BlogPosts.create('How Atomic Blonde is the worst movie ever', 'Charlize Theron r
 
 //get the blog posts that are on the server
 app.get('/blog-posts', (req, res) => {
-  res.json(BlogPosts.get());
+  BlogPostsData
+    .find()
+    .then(BlogPosts => {
+      res.json({
+          BlogPosts: BlogPosts.map((blogPost) => blogPost.serialize())
+        })
+        .catch(
+          err => {
+            console.error(err);
+            res.status(500).json({
+              message: 'Internal Server Error'
+            });
+          });
+    });
+
 });
 
 //post to the blog posts on the server
@@ -42,7 +58,7 @@ app.post('/blog-posts', jsonParser, (req, res) => {
 
 //delete a blog post
 app.delete('/blog-posts/:id', (req, res) => {
-  BlogPosts.delete(req.params.id);
+  BlogPostsData.delete(req.params.id);
   res.send(204).end();
 });
 
