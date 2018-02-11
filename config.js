@@ -1,10 +1,8 @@
 'use strict';
-export const DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost/';
+exports.DATABASE_URL = process.env.DATABASE_URL || 'mongodb://localhost/';
 
-/* -
-  TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/';
+/*
+  exports.TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/';
+*/
 
-+
-  TEST_DATABASE_URL = process.env.TEST_DATABASE_URL || 'mongodb://localhost/'; */
-
-export const PORT = process.env.PORT || 8080;
+exports.PORT = process.env.PORT || 8080;
