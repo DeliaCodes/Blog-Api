@@ -12,8 +12,8 @@ const blogPostSchema = mongoose.Schema({
     required: true
   },
   author: {
-    first: String,
-    last: String
+    firstname: String,
+    lastname: String
   },
   created: {
     type: String
@@ -21,8 +21,10 @@ const blogPostSchema = mongoose.Schema({
 });
 
 blogPostSchema.virtual('authorString').get(() => {
-  return `${this.author.first} ${this.author.last}`.trim();
+  return `${this.author.firstname} ${this.author.lastname}`.trim();
 });
+
+
 
 
 
