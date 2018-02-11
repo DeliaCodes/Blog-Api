@@ -35,7 +35,7 @@ app.get('/blog-posts', (req, res) => {
     .find()
     .then(BlogPosts => {
       res.json({
-          BlogPosts: BlogPosts.map((blogPost) => blogPost.serialize())
+          BlogPosts: BlogPosts.map((BlogPosts) => BlogPosts.serialize())
         })
         .catch(
           err => {
@@ -47,6 +47,18 @@ app.get('/blog-posts', (req, res) => {
     });
 
 });
+
+app.get('/blog-posts/:id', (req, res) => {
+  BlogPostsData
+    .findById(req.params.id)
+    .then(BlogPosts => res.json(BlogPosts.serialize()))
+    .catch(err => {
+      console.error(err);
+      res.status(500).json({
+        message: 'Internal server error'
+      });
+    });
+})
 
 //post to the blog posts on the server
 app.post('/blog-posts', jsonParser, (req, res) => {
