@@ -80,6 +80,15 @@ function createBlogPostsModel() {
   return storage;
 } */
 
+blogPostSchema.methods.serialize = () => {
+  return {
+    id: this._id,
+    name: this.name,
+    content: this.content,
+    author: this.author
+  };
+};
+
 const BlogPosts = mongoose.model('BlogPosts', blogPostSchema);
 
 module.exports = {
