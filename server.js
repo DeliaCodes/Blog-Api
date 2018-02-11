@@ -3,8 +3,6 @@ const resolve = require('dns');
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const chai = require('chai');
-const chaiHttp = require('chai-http');
 const app = express();
 const mongoose = require('mongoose');
 
@@ -22,10 +20,12 @@ const {
   DATABASE_URL
 } = require('./config');
 
-//blog posts for the server
-BlogPosts.create('Star Wars and the use of Stock Characters', 'Is Lana Del Ray really Rey? Who Can tell the difference? What were those small furry creatures anyway? How do we know snoke isnt secret alternative universe Darth Maul?', 'by Seru4ever');
+app.use(bodyParser.json());
+
+//blog posts to go into the database
+/* BlogPosts.create('Star Wars and the use of Stock Characters', 'Is Lana Del Ray really Rey? Who Can tell the difference? What were those small furry creatures anyway? How do we know snoke isnt secret alternative universe Darth Maul?', 'by Seru4ever');
 BlogPosts.create('Where have all of the sensible people gone', 'Something something about doing it yourself and never relying on anyone', 'by Gamer4579231');
-BlogPosts.create('How Atomic Blonde is the worst movie ever', 'Charlize Theron really? And fucking James Gascoine - why was he ever dead?', 'by Agent Strange');
+BlogPosts.create('How Atomic Blonde is the worst movie ever', 'Charlize Theron really? And fucking James Gascoine - why was he ever dead?', 'by Agent Strange'); */
 
 //get the blog posts that are on the server
 app.get('/blog-posts', (req, res) => {
