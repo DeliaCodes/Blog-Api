@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 const jsonParser = bodyParser.json();
 
 mongoose.Promise = global.Promise;
-mongoose.connect(DATABASE_URL);
-S
+
+
 
 //modularize routes?
 const {
@@ -21,7 +21,7 @@ const {
   PORT,
   DATABASE_URL
 } = require('./config');
-
+mongoose.connect(DATABASE_URL);
 app.use(bodyParser.json());
 
 //blog posts to go into the database
