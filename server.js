@@ -47,7 +47,7 @@ app.get('/blog-posts', (req, res) => {
     });
 
 });
-
+// get by id
 app.get('/blog-posts/:id', (req, res) => {
   BlogPostsData
     .findById(req.params.id)
@@ -58,7 +58,17 @@ app.get('/blog-posts/:id', (req, res) => {
         message: 'Internal server error'
       });
     });
-})
+});
+
+app.get('/blog-posts', (req, res) => {
+  const filters = {};
+  const queryableFields = ['title', 'author'];
+  queryableFields.forEach(field => {
+    if (req.query[field]) {
+      filters[field] = req.query[field];
+    }
+  });
+});
 
 //post to the blog posts on the server
 app.post('/blog-posts', jsonParser, (req, res) => {
