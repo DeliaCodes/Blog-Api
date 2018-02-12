@@ -84,17 +84,25 @@ app.put('/blog-posts/:id', jsonParser, (req, res) => {
 
 let server;
 
-const runServer = () => {
-  const port = process.env.PORT || 8080;
+const runServer = (DATABASE_URL, port = PORT) => {
   return new Promise((resolve, reject) => {
-    server = app.listen(port, () => {
-      console.log(`Your app is listening on port ${port}`);
-      resolve(server);
-    }).on('error', err => {
-      reject(err);
+    mongoose.connect(DATABASE_URL, {
+      useMongoClient: true
+    }, err => {
+      if (err) {
+        return reject(err);
+      }
+      server = app.listen(port, () => {
+        console.log(`Your app is listening on port ${port}`);
+        resolve();
+      }).on('error', err => {
+        mongoose.disconnect();
+        reject(err);
+      });
     });
   });
 };
+
 
 const closeServer = () => {
   return new Promise((resolve, reject) => {
@@ -110,7 +118,7 @@ const closeServer = () => {
 };
 
 if (require.main === module) {
-  runServer().catch(err => console.error(err));
+  runServer(DATABASE_URL).catch(err => console.error(err));
 }
 
 module.exports = {
